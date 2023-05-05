@@ -24,13 +24,39 @@ To the best of our knowledge, our Video K-Net is the first open-sourced method t
 
 ### Environment and DataSet Preparation 
 Our codebase is based on MMDetection and MMSegmentation. Parts of the code is borrowed from MMtracking and UniTrack.
+* Nvidia device with CUDA 
+* Python 3.7+
+* PyTorch 1.7.0+
+* torchvision 0.8.0+
+* MIM >= 0.1.1
+* MMCV-full >= v1.3.8
+* MMDetection == v2.18.0
+* Other python packages in requirements.txt
 
-- MIM >= 0.1.1
-- MMCV-full >= v1.3.8
-- MMDetection == v2.18.0
-- timm
-- scipy
-- panopticapi
+#### (Recommended) Install with conda
+
+Install conda from [here](https://repo.anaconda.com/miniconda/), Miniconda3-latest-(OS)-(platform).
+```shell
+# 1. Create a conda virtual environment.
+conda create -n video-k-net python=3.7 -y
+conda activate video-k-net
+
+# 2. Install PyTorch
+pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+
+
+# 3. Install MMCV and MMDetection
+pip install openmim
+mim install mmcv-full==1.3.14
+mim install mmdet==2.18.0
+
+# 4. Install other dependencies
+pip install -r requirements.txt
+pip install cython_bbox==0.1.3
+```
+
+
+
 
 See the [DATASET.md](https://github.com/lxtGH/Video-K-Net/blob/main/DATASET.md)
 
