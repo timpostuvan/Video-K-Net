@@ -110,8 +110,8 @@ Our models are trained with two V100 machines.
 For Local machine:
 
 ```bash
-# train Video K-Net on KITTI-step with 8 GPUs
-sh ./tools/dist_train.sh video_knet_step configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py 8 $WORK_DIR --no-validate
+# train Video K-Net on KITTI-step with 2 GPUs
+bash ./tools/dist_train.sh video_knet_step configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py 2 --no-validate
 ```
 
 
@@ -120,20 +120,20 @@ sh ./tools/dist_train.sh video_knet_step configs/det/video_knet_kitti_step/video
 We provide both VPQ and STQ metrics to evaluate VPS models. 
 
 ```bash
-# test locally 
-sh ./tools/dist_step_test.sh configs/det/knet_cityscapes_ste/knet_s3_r50_fpn.py $MODEL_DIR 
+# generate predictions locally on 1 GPUs 
+bash ./tools/dist_step_test.sh configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py $CHECKPOINT 1 $RESULTS_DIR
 ```
 
 We also dump the colored images for debug.
 
 ```bash
 # eval STEP STQ
-python tools/eval_dstq_step.py result_path gt_path
+bash ./tools/eval_dstq_step.sh $RESULTS_DIR 
 ```
 
 ```bash
 # eval STEP VPQ
-python tools/eval_dvpq_step.py result_path gt_path
+bash ./tools/eval_dvpq_step.sh $RESULTS_DIR
 ```
 
 #### Toy Video K-Net 
