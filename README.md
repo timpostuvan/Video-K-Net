@@ -111,7 +111,7 @@ For Local machine:
 
 ```bash
 # train Video K-Net on KITTI-step with 2 GPUs
-bash ./tools/dist_train.sh video_knet_step configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py 2 --no-validate
+bash ./tools/dist_train.sh configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py 2 $WORK_DIR --no-validate
 ```
 
 
