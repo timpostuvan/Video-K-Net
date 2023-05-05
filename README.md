@@ -52,7 +52,6 @@ mim install mmdet==2.18.0
 
 # 4. Install other dependencies
 pip install -r requirements.txt
-pip install cython_bbox==0.1.3
 ```
 
 
