@@ -114,6 +114,7 @@ data
 *.pkl
 *.pkl.json
 *.log.json
+*.png
 
 # Pytorch
 *.pth
