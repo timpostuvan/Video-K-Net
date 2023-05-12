@@ -258,3 +258,28 @@ ECCV-2022, PolyphonicFormer: A Unified Framework For Panoptic Segmentation + Dep
 }
 ```
 
+
+# Train on the cluster: Installation steps
+
+## Load the necessary modules on the server
+
+module load gcc/8.4.0-cuda python/3.7.7 cuda/11.6.2
+
+
+## Install conda
+https://waylonwalker.com/install-miniconda/
+
+
+## Install torch
+pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html --user
+
+
+## Install MMCV and MMDetection
+pip install openmim --user
+mim install mmcv-full==1.3.14 --user
+mim install mmdet==2.18.0 --user
+
+
+## Install other dependencies
+pip install -r requirements.txt --user
+
