@@ -1,29 +1,12 @@
-# Video K-Net: A Simple, Strong, and Unified Baseline for Video Segmentation (CVPR-2022, oral) 
-## [Paper](https://arxiv.org/abs/2204.04656), [Sides](./slides/Video-KNet-cvpr-slides-10-25-version.pptx), [Poster](./slides/cvpr22_poster_lxt_zww_pjm.pdf), [Video](https://www.youtube.com/watch?v=LIEyp_czu20&t=3s)
+# Ablation Studies of Video K-Net: A Simple, Strong, and Unified Baseline for Video Segmentation
 
-[Xiangtai Li](https://lxtgh.github.io/),
-[Wenwei Zhang](https://zhangwenwei.cn/),
-[Jiangmiao Pang](https://oceanpang.github.io/),
-[Kai Chen](https://chenkai.site/), 
-[Guangliang Cheng](https://scholar.google.com/citations?user=FToOC-wAAAAJ),
-[Yunhai Tong](https://scholar.google.com/citations?user=T4gqdPkAAAAJ&hl=zh-CN),
-[Chen Change Loy](https://www.mmlab-ntu.com/person/ccloy/).
+We explore modifications of Video K-Net, a simple, strong, and unified framework for fully end-to-end dense video segmentation. Video K-Net is built upon K-Net, a method of unifying image segmentation via a group of learnable kernels.
 
-We introduce Video K-Net, a simple, strong, and unified framework for fully end-to-end dense video segmentation. 
-
-The method is built upon K-Net, a method of unifying image segmentation via a group of learnable kernels.
-
-This project contains the training and testing code of Video K-Net for both VPS (Video Panoptic Segmentation), 
-VSS(Video Semantic Segmentation), VIS(Video Instance Segmentation).
-
-To the best of our knowledge, our Video K-Net is the first open-sourced method that supports three different video segmentation tasks (VIS, VPS, VSS) for Video Scene Understanding.
-
-## News! Video K-Net is acknowledged as a strong baseline for CVPR-2023 workshop ["The 2nd Pixel-level Video Understanding in the Wild"](https://www.vspwdataset.com/Workshop%202023.html). 
-## News! Video K-Net also supports [VIP-Seg](https://github.com/VIPSeg-Dataset/VIPSeg-Dataset) dataset(CVPR-2022). It also achieves the new state-of-the-art result.
+This project contains the training and evaluation code of Video K-Net for VPS (Video Panoptic Segmentation) on KITTI-STEP dataset.
 
 
-### Environment and DataSet Preparation 
-Our codebase is based on MMDetection and MMSegmentation. Parts of the code is borrowed from MMtracking and UniTrack.
+### Environment and Dataset Preparation 
+The codebase is based on MMDetection and MMSegmentation. Parts of the code are borrowed from UniTrack.
 * Nvidia device with CUDA 
 * Python 3.7+
 * PyTorch 1.7.0+
@@ -44,7 +27,6 @@ conda activate video-k-net
 # 2. Install PyTorch
 pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 
-
 # 3. Install MMCV and MMDetection
 pip install openmim
 mim install mmcv-full==1.3.14
@@ -55,34 +37,23 @@ pip install -r requirements.txt
 ```
 
 
+#### Docker
+
+**TODO**
+
+For instructions how to obtain and properly prepare the datasets, see the [DATASET.md](https://github.com/timpostuvan/Video-K-Net/blob/main/DATASET.md).
 
 
-See the [DATASET.md](https://github.com/lxtGH/Video-K-Net/blob/main/DATASET.md)
+### Checkpoints of Pretrained K-Net Models and Trained Video K-Net Models
 
-knet folder contains the Video K-Net for VPS.
+We provide checkpoints of pretrained and trained models. The pretrained K-Net models can be used as an initialization to train the Video K-Net, while the trained Video K-Net models are ready for play and test.
 
-knet_vis folder contains the Video K-Net for VIS.
-
-
-
-### Pretrained CKPTs and Trained Models
-
-We provide the pretrained models for VPS and VIS.
-
-Baidu Yun Link: [here](https://pan.baidu.com/s/12dIinkAF3o60fcAoggVhjQ)  Code:i034
-
-One Drive Link: [here](https://1drv.ms/u/s!Ai4mxaXd6lVBgSCTUS0QWNim2zGx?e=uceSee)
-
-The pretrained models are provided to train the Video K-Net.
-
-The trained models are also provided for play and test.
+**TODO**: Google Drive Link: [here]()
 
 
+### Training on KITTI-STEP
 
-### [VPS] KITTI-STEP
-
-1. First pretrain K-Net on Cityscapes-STEP dataset. As shown in original STEP paper(Appendix Part) and our own EXP results, this step is very important to improve the segmentation performance.
-You can also use our trained model for verification.
+1. First, pretrain K-Net on Cityscapes-STEP dataset. This step is very important to improve the segmentation performance.
 
 Cityscape-STEP follows the format of STEP: 17 stuff classes and 2 thing classes. 
 
@@ -91,22 +62,26 @@ Cityscape-STEP follows the format of STEP: 17 stuff classes and 2 thing classes.
 bash ./tools/dist_train.sh configs/knet_cityscapes_step/knet_s3_r50_fpn.py 3 $WORK_DIR --no-validate
 ```
 
-2. Then train the Video K-Net on KITTI-STEP. We have provided the pretrained models from Cityscapes of Video K-Net.
-
-```bash
-# train Video K-Net on KITTI-step with 3 GPUs from scratch
-bash ./tools/dist_train.sh configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py 3 $WORK_DIR --no-validate
-```
+2. Then, train the Video K-Net on KITTI-STEP. We have provided checkpoints of the pretrained K-Net models on Cityscapes-STEP.
 
 ```bash
 # train Video K-Net on KITTI-step with 3 GPUs from pretrained checkpoint
-bash ./tools/dist_train.sh configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py 3 $WORK_DIR --no-validate --load-from $CHECKPOINT
+bash ./tools/dist_train.sh configs/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py 3 $WORK_DIR --no-validate --load-from $CHECKPOINT
 ```
 
+It is also possible to train Video K-Net from scratch, however, this results in significantly inferior performance.
 
-3. Testing and Demo.
+```bash
+# train Video K-Net on KITTI-step with 3 GPUs from scratch
+bash ./tools/dist_train.sh configs/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py 3 $WORK_DIR --no-validate
+```
 
-We provide both VPQ and STQ metrics to evaluate VPS models. 
+The above commands use the original Video K-Net architecture. To train a modified architecture or in a different experimental setting, change the configuration file.
+
+
+### Evaluation on KITTI-STEP
+
+1. First, generate predictions on validation set.
 
 ```bash
 # generate predictions on 1 GPU
@@ -114,6 +89,10 @@ bash ./tools/inference.sh configs/det/video_knet_kitti_step/video_knet_s3_r50_rp
 ```
 
 Colored images are also dupmed for debugging purposes.
+
+The above command use the original Video K-Net architecture. To generate predictions for a different architecture, change the configuration file.
+
+2. Then, evaluate prediction according to STQ and VPQ metrics.
 
 ```bash
 # evaluate STQ
@@ -125,111 +104,29 @@ bash ./tools/evaluate_stq.sh $RESULTS_DIR
 bash ./tools/evaluate_vpq.sh $RESULTS_DIR
 ```
 
-#### Toy Video K-Net 
-
-As shown in the paper, we also provide toy video K-Net in knet/video/knet_quansi_dense_embed_fc_toy_exp.py. 
-You use the K-Net pre-trained on image-level KITTI-STEP without tracking.
+## Results and Visualizations
 
 
-### [VIS] YouTube-VIS-2019
-
-1. First Download the pre-trained Image K-Net instance segmentation models. All the models are pretrained on COCO which is
-a common. You can also pretrain it by yourself. We also provide the config for pretraining.
-
-For slurm users:
-
-```bash
-# train K-Net instance segmentation models on COCO using R-50
-GPUS=8 sh ./tools/slurm_train.sh $PARTITION knet_instance configs/det/coco/knet_s3_r50_fpn_ms-3x_coco.py $WORK_DIR 
-```
-
-2. Then train the video K-Net in a clip-wised manner. 
-
-```bash
-# train Video K-Net VIS models using R-50
-GPUS=8 sh ./tools/slurm_train.sh $PARTITION video_knet_vis configs/video_knet_vis/video_knet_vis/knet_track_r50_1x_youtubevis.py $WORK_DIR --load-from /path_to_knet_instance_coco
-```
-
-3. To evaluate the results of Video K-Net on VIS. Dump the prediction results for submission to the conda server. 
-
-```bash
-# test Video K-Net VIS models using R-50
-GPUS=8 sh tools_vis/dist_test_whole_video.sh $PARTITION video_knet_vis configs/video_knet_vis/video_knet_vis/knet_track_r50_1x_youtubevis.py $WORK_DIR --format-only
-```
-The result json is dumped into the root of this codebase. 
-
-### [VPS] VIP-Seg
-
-1. First Download the pre-trained Image K-Net panoptic segmentation models. All the models are pretrained on COCO which is
-a common step following VIP-Seg. You can also pretrain it by yourself. We also provide the config for pretraining.
-```bash
-# train K-Net on COCO Panoptic Segmetnation
-GPUS=8 sh ./tools/slurm_train.sh $PARTITION knet_coco configs/det/coco/knet_s3_r50_fpn_ms-3x_coco-panoptic.py $WORK_DIR 
-```
-
-2. Train the Video K-Net on the VIP-Seg dataset. 
-```bash
-# train Video K-Net on VIP-Seg
-GPUS=8 sh ./tools/slurm_train.sh $PARTITION video_knet_vis configs/det/video_knet_vipseg/video_knet_s3_r50_rpn_vipseg_mask_embed_link_ffn_joint_train.py $WORK_DIR --load-from /path/knet_coco_pretrained_r50
-```
-
-3. Test the Video K-Net on VIP-Seg val dataset.
-```bash
-# test locally on VIP-Seg
-sh ./tools/dist_step_test.sh configs/det/video_knet_vipseg/video_knet_s3_r50_rpn_vipseg_mask_embed_link_ffn_joint_train.py $MODEL_DIR 
-```
-
-We also dump the colored images for debug.
-
-```bash
-# eval STEP STQ
-python tools/eval_dstq_vipseg.py result_path gt_path
-```
-
-```bash
-# eval STEP VPQ
-python tools/eval_dvpq_vipseg.py result_path gt_path
-```
+### Ablation Study: Video K-Net Architecture (Trained From Scratch)
 
 
-## Visualization Results
+### Ablation Study: Video K-Net Architecture (Pretrained on Cityscapes-STEP)
 
 
-### Results on KITTI-STEP DataSet
+### Ablation Study: Temporal Neighborhood for Sampling Reference Images
 
 
-
-### Results on VIP-Seg DataSet
-
-
-
-### Results on YouTube-VIS DataSet
+### Visualization
+**TODO**
 
 
+## Acknowledgement
 
-### Short term segmentation and tracking results on Cityscapes VPS dataset.
+Our code is based on the PyTorch implementation of [Video K-Net](https://github.com/yenchenlin/nerf-pytorch).
 
-images(left), Video K-Net(middle), Ground Truth 
-![Alt Text](./figs/cityscapes_vps_video_1_20220318131729.gif)
+## Citation
 
-![Alt Text](./figs/cityscapes_vps_video_2_20220318132943.gif)
-
-### Long term segmentation and tracking results on STEP dataset.
-
-![Alt Text](./figs/step_video_1_20220318133227.gif)
-
-![Alt Text](./figs/step_video_2_20220318133423.gif)
-
-
-## Related Project and Acknowledgement
-## Citing Video K-Net :pray:
-
-If you use our codebase in your research or used for CVPR-2023 pixel-level video workshop, please use the following BibTeX entry.
-
-NIPS-2021, K-Net: Unified Segmentation: Our Image baseline (https://github.com/ZwwWayne/K-Net)
-
-ECCV-2022, PolyphonicFormer: A Unified Framework For Panoptic Segmentation + Depth Estimation (winner of ICCV-2021 BMTT workshop)
-(https://github.com/HarborYuan/PolyphonicFormer)
+If you find our work useful in your research, please consider citing:
 
 ```bibtex
 @inproceedings{li2022videoknet,
@@ -246,29 +143,3 @@ ECCV-2022, PolyphonicFormer: A Unified Framework For Panoptic Segmentation + Dep
   year={2021}
 }
 ```
-
-
-# Train on the cluster: Installation steps
-
-## Load the necessary modules on the server
-
-module load gcc/8.4.0-cuda python/3.7.7 cuda/11.6.2
-
-
-## Install conda
-https://waylonwalker.com/install-miniconda/
-
-
-## Install torch
-pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html --user
-
-
-## Install MMCV and MMDetection
-pip install openmim --user
-mim install mmcv-full==1.3.14 --user
-mim install mmdet==2.18.0 --user
-
-
-## Install other dependencies
-pip install -r requirements.txt --user
-
