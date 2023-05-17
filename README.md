@@ -16,7 +16,7 @@ The codebase is based on MMDetection and MMSegmentation. Parts of the code are b
 * MMDetection == v2.18.0
 * Other python packages in requirements.txt
 
-#### (Recommended) Install with conda
+#### (Recommended) Install with Conda
 
 Install conda from [here](https://repo.anaconda.com/miniconda/), Miniconda3-latest-(OS)-(platform).
 ```shell
@@ -109,11 +109,26 @@ bash ./tools/evaluate_vpq.sh $RESULTS_DIR
 
 ### Ablation Study: Video K-Net Architecture (Trained From Scratch)
 
+| Adaptive kernel update strategy  | STQ      | AQ       | SQ       | VPQ      |  
+|----------------------------------|----------|----------|----------|----------|
+| Original                         | 53.9     | **50.0** | 58.2     | 38.6     |
+| Concatenation                    | 51.0     | 48.1     | 54.1     | 37.2     |
+| Skip connections                 | **54.3** | 49.7     | **59.4** | **38.9** |
+| Concatenation + skip connections | 52.0     | 48.5     | 55.8     | 38.7     |
+| MLP                              | 52.2     | 48.4     | 56.3     | 38.1     |
+
 
 ### Ablation Study: Video K-Net Architecture (Pretrained on Cityscapes-STEP)
 
 
 ### Ablation Study: Temporal Neighborhood for Sampling Reference Images
+
+| Temporal Neighborhood | STQ      | AQ       | SQ       | VPQ      |  
+|-----------------------|----------|----------|----------|----------|
+| Original: [-2, 2]     | 67.5     | 68.7     | 66.3     | **48.3** |
+| Causal: [-2, 0]       | 67.5     | **70.3** | 64.8     | 47.4     |
+| More local: [-1, 1]   | 66.9     | 67.7     | 66.2     | 47.6     |
+| More global: [-3, 3]  | **68.1** | 68.9     | **67.3** | 48.1     |
 
 
 ### Visualization
