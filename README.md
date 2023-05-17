@@ -81,37 +81,26 @@ The trained models are also provided for play and test.
 
 ### [VPS] KITTI-STEP
 
-1. First pretrain K-Net on Cityscapes-STEP datasset. As shown in original STEP paper(Appendix Part) and our own EXP results, this step is very important to improve the segmentation performance.
+1. First pretrain K-Net on Cityscapes-STEP dataset. As shown in original STEP paper(Appendix Part) and our own EXP results, this step is very important to improve the segmentation performance.
 You can also use our trained model for verification.
 
 Cityscape-STEP follows the format of STEP: 17 stuff classes and 2 thing classes. 
 
 ```bash
-# train cityscapes step panoptic segmentation models
-sh ./tools/slurm_train.sh $PARTITION knet_step configs/det/knet_cityscapes_step/knet_s3_r50_fpn.py $WORK_DIR --no-validate
+# train Cityscapes STEP panoptic segmentation model on 3 GPUs
+bash ./tools/dist_train.sh configs/knet_cityscapes_step/knet_s3_r50_fpn.py 3 $WORK_DIR --no-validate
 ```
 
 2. Then train the Video K-Net on KITTI-STEP. We have provided the pretrained models from Cityscapes of Video K-Net.
 
-For slurm users:
-
 ```bash
-# train Video K-Net on KITTI-step using R-50
-GPUS=8 sh ./tools/slurm_train.sh $PARTITION video_knet_step configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py $WORK_DIR --no-validate --load-from /path_to_knet_step_city_r50
+# train Video K-Net on KITTI-step with 3 GPUs from scratch
+bash ./tools/dist_train.sh configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py 3 $WORK_DIR --no-validate
 ```
 
 ```bash
-# train Video K-Net on KITTI-step using Swin-base
-GPUS=16 GPUS_PER_NODE=8 sh ./tools/slurm_train.sh $PARTITION video_knet_step configs/det/video_knet_kitti_step/video_knet_s3_swinb_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py $WORK_DIR --no-validate --load-from /path_to_knet_step_city_r50
-```
-
-Our models are trained with two V100 machines. 
-
-For Local machine:
-
-```bash
-# train Video K-Net on KITTI-step with 2 GPUs
-bash ./tools/dist_train.sh configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py 2 $WORK_DIR --no-validate
+# train Video K-Net on KITTI-step with 3 GPUs from pretrained checkpoint
+bash ./tools/dist_train.sh configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py 3 $WORK_DIR --no-validate --load-from $CHECKPOINT
 ```
 
 
@@ -120,20 +109,20 @@ bash ./tools/dist_train.sh configs/det/video_knet_kitti_step/video_knet_s3_r50_r
 We provide both VPQ and STQ metrics to evaluate VPS models. 
 
 ```bash
-# generate predictions locally on 1 GPUs 
-bash ./tools/dist_step_test.sh configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py $CHECKPOINT 1 $RESULTS_DIR
+# generate predictions on 1 GPU
+bash ./tools/inference.sh configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py $CHECKPOINT $RESULTS_DIR
 ```
 
-We also dump the colored images for debug.
+Colored images are also dupmed for debugging purposes.
 
 ```bash
-# eval STEP STQ
-bash ./tools/eval_dstq_step.sh $RESULTS_DIR 
+# evaluate STQ
+bash ./tools/evaluate_stq.sh $RESULTS_DIR 
 ```
 
 ```bash
-# eval STEP VPQ
-bash ./tools/eval_dvpq_step.sh $RESULTS_DIR
+# evaluate VPQ
+bash ./tools/evaluate_vpq.sh $RESULTS_DIR
 ```
 
 #### Toy Video K-Net 
