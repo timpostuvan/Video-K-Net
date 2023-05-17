@@ -92,7 +92,7 @@ Colored images are also dupmed for debugging purposes.
 
 The above command use the original Video K-Net architecture. To generate predictions for a different architecture, change the configuration file.
 
-2. Then, evaluate prediction according to STQ and VPQ metrics.
+2. Then, evaluate predictions according to STQ and VPQ metrics.
 
 ```bash
 # evaluate STQ
@@ -122,7 +122,7 @@ bash ./tools/evaluate_vpq.sh $RESULTS_DIR
 
 ## Acknowledgement
 
-Our code is based on the PyTorch implementation of [Video K-Net](https://github.com/yenchenlin/nerf-pytorch).
+Our code is based on the PyTorch implementation of [Video K-Net](https://github.com/lxtGH/Video-K-Net).
 
 ## Citation
 
