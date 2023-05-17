@@ -53,7 +53,7 @@ We provide checkpoints of pretrained and trained models. The pretrained K-Net mo
 
 ### Training on KITTI-STEP
 
-1. First, pretrain K-Net on Cityscapes-STEP dataset. This step is very important to improve the segmentation performance.
+1. Pretrain K-Net on Cityscapes-STEP dataset. This step is very important to improve the segmentation performance.
 
 Cityscape-STEP follows the format of STEP: 17 stuff classes and 2 thing classes. 
 
@@ -62,7 +62,7 @@ Cityscape-STEP follows the format of STEP: 17 stuff classes and 2 thing classes.
 bash ./tools/dist_train.sh configs/knet_cityscapes_step/knet_s3_r50_fpn.py 3 $WORK_DIR --no-validate
 ```
 
-2. Then, train the Video K-Net on KITTI-STEP. We have provided checkpoints of the pretrained K-Net models on Cityscapes-STEP.
+2. Train the Video K-Net on KITTI-STEP. We have provided checkpoints of the pretrained K-Net models on Cityscapes-STEP.
 
 ```bash
 # train Video K-Net on KITTI-step with 3 GPUs from pretrained checkpoint
@@ -81,7 +81,7 @@ The above commands use the original Video K-Net architecture. To train a modifie
 
 ### Evaluation on KITTI-STEP
 
-1. First, generate predictions on validation set.
+1. Generate predictions on validation set.
 
 ```bash
 # generate predictions on 1 GPU
@@ -92,7 +92,7 @@ Colored images are also dupmed for debugging purposes.
 
 The above command use the original Video K-Net architecture. To generate predictions for a different architecture, change the configuration file.
 
-2. Then, evaluate predictions according to STQ and VPQ metrics.
+2. Evaluate predictions according to STQ and VPQ metrics.
 
 ```bash
 # evaluate STQ
