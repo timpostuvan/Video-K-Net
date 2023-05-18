@@ -36,11 +36,6 @@ mim install mmdet==2.18.0
 pip install -r requirements.txt
 ```
 
-
-#### Docker
-
-**TODO**
-
 For instructions how to obtain and properly prepare the datasets, see the [DATASET.md](https://github.com/timpostuvan/Video-K-Net/blob/main/DATASET.md).
 
 
