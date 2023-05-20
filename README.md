@@ -43,7 +43,7 @@ For instructions how to obtain and properly prepare the datasets, see the [DATAS
 
 We provide checkpoints of pretrained and trained models. The pretrained K-Net models can be used as an initialization to train the Video K-Net, while the trained Video K-Net models are ready for play and test.
 
-**TODO**: Google Drive Link: [here]()
+Google Drive Link: [here](https://drive.google.com/drive/folders/1DQvusMenJ01Am53-6UYAWaKx7naFrwOi?usp=sharing)
 
 
 ### Training on KITTI-STEP
