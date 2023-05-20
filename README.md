@@ -115,6 +115,11 @@ bash ./tools/evaluate_vpq.sh $RESULTS_DIR
 
 ### Ablation Study: Video K-Net Architecture (Pretrained on Cityscapes-STEP)
 
+| Adaptive kernel update strategy  | STQ      | AQ       | SQ       | VPQ      |  
+|----------------------------------|----------|----------|----------|----------|
+| Original                         | 64.8     | 64.9     | **64.6** | **46.2** |
+| Skip connections                 | **66.0** | **67.6** | 64.4     | 45.7     |
+
 
 ### Ablation Study: Temporal Neighborhood for Sampling Reference Images
 
