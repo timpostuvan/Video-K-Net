@@ -80,7 +80,7 @@ The above commands use the original Video K-Net architecture. To train a modifie
 
 ```bash
 # generate predictions on 1 GPU
-bash ./tools/inference.sh configs/det/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py $CHECKPOINT $RESULTS_DIR
+bash ./tools/inference.sh configs/video_knet_kitti_step/video_knet_s3_r50_rpn_1x_kitti_step_sigmoid_stride2_mask_embed_link_ffn_joint_train.py $CHECKPOINT $RESULTS_DIR
 ```
 
 Colored images are also dupmed for debugging purposes.
