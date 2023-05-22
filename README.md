@@ -99,6 +99,17 @@ bash ./tools/evaluate_stq.sh $RESULTS_DIR
 bash ./tools/evaluate_vpq.sh $RESULTS_DIR
 ```
 
+
+### Visualization
+
+To visualize predictions, run the following command that generates colorized images (in `colorized` folder) and GIFs of colorized images (in `colorized_gif` folder).
+
+```bash
+# visualize predictions
+bash ./tools/visualize.sh $RESULTS_DIR
+```
+
+
 ## Results and Visualizations
 
 
