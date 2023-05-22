@@ -1,5 +1,5 @@
 # Imports
-from visualize_initial_methods import cityscapes_cat2rgb, trackmap2rgb
+from tools.utils.utils_visualization import cityscapes_cat2rgb, trackmap2rgb
 import cv2
 import os
 import numpy as np

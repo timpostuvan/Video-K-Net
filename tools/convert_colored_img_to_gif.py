@@ -1,5 +1,5 @@
 # Imports
-from visualize_initial_methods import cityscapes_cat2rgb
+from tools.utils.utils_visualization import cityscapes_cat2rgb
 import cv2
 import os
 import numpy as np
@@ -66,8 +66,7 @@ if __name__ == "__main__":
         os.mkdir(os.path.join(NEW_PATH, "instance"))
         print("Created the folder for the instance masks!")
 
-    # Say that we do not have any bar for showing the progress
-    print("Computing the GIFs in parallel, so no progress bar :(")
+    print("Computing the GIFs in parallel")
 
     # Loop over all the files in the folder
     _ = Parallel(n_jobs=num_jobs)(delayed(convert_to_gif)(folder_name, NEW_PATH, segmentation=True) for folder_name in os.listdir(os.path.join(PATH, "segmentation")))
