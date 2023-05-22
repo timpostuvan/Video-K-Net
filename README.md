@@ -32,7 +32,8 @@ pip install openmim
 mim install mmcv-full==1.3.14
 mim install mmdet==2.18.0
 
-# 4. Install other dependencies
+# 4. Install Cython and other dependencies
+pip install Cython==0.29.34
 pip install -r requirements.txt
 ```
 
