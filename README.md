@@ -110,6 +110,8 @@ To visualize predictions, run the following command that generates colorized ima
 bash ./tools/visualize.sh $RESULTS_DIR
 ```
 
+To transform the input RGB images from KITTI-STEP into a GIF, please use the file `tools/convert_KITTI_img_to_gif.py` by providing the path to the folder with RGB images.
+
 
 ## Results and Visualizations
 
@@ -144,7 +146,13 @@ bash ./tools/visualize.sh $RESULTS_DIR
 
 
 ### Visualization
-**TODO**
+#### Initial model:
+Input RGB Images(left), Segmentation Mask (middle), Instances Mask (right)
+![Alt Text](./figs/base.gif)
+
+#### Our best model (Skip connections):
+Input RGB Images(left), Segmentation Mask (middle), Instances Mask (right)
+![Alt Text](./figs/our_implementation.gif)
 
 
 ## Acknowledgement
