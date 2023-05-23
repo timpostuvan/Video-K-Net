@@ -146,13 +146,13 @@ To transform the input RGB images from KITTI-STEP into a GIF, please use the fil
 
 
 ### Visualization
-#### Initial model (Trained by us from scratch):
-Input RGB Images(left), Segmentation Mask (middle), Instances Mask (right)
-![Alt Text](./figs/our_base.gif)
+#### Original model:
+Input RGB images (left), semantic segmentation masks (middle), instance segmentation masks (right)
+![Alt Text](./figs/video_knet_step_pretrained.gif)
 
-#### Our best model (Skip connections):
-Input RGB Images(left), Segmentation Mask (middle), Instances Mask (right)
-![Alt Text](./figs/our_implementation.gif)
+#### Our best model with skip connections:
+Input RGB images (left), semantic segmentation masks (middle), instance segmentation masks (right)
+![Alt Text](./figs/video_knet_step_pretrained_skip.gif)
 
 
 ## Acknowledgement
