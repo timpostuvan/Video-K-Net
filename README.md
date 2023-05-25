@@ -5,6 +5,15 @@ We explore modifications of Video K-Net, a simple, strong, and unified framework
 This project contains the training and evaluation code of Video K-Net for VPS (Video Panoptic Segmentation) on KITTI-STEP dataset.
 
 
+### Overview of Contributions
+
+In our work, we try to improve Video K-Net architecture and training regime to boost performance on VPS task. More specifically, we focus on the setting without an abundance of data, such as in the case of training on KITTI-STEP dataset. Our contributions are twofold:
+
+1. **We ablate different kernel update strategies for K-Net**: concatenation, skip connections, concatenation + skip connections, and MLP. Concatenation could potentially improve performance as information from the assembled features and kernels is more explicitly presented to the model, in contrast, to elementwise multiplication in the original architecture. On the other hand, skip connections remove the need for learning two update functions, and enforce that the model learns only a single "difference" update, which is more sample efficient (fewer parameters). To examine the possibility that the current model is not expressive enough, we also try a variant where all linear layers are substituted with 2-layer multilayer perceptrons (MLPs).
+
+2. **We ablate different temporal neighborhoods for sampling of reference images in Video K-Net**: smaller neighborhood, larger neighborhood, and causal neighborhood. A smaller neighborhood could encourage the model to focus on semantic segmentation, while a larger neighborhood might make the model focus more on tracking consistency. Furthermore, a causal neighborhood could improve the semantic understanding of the model as it might better learn the dynamics of objects since the reference image is always in the past of the key image.
+
+
 ### Environment and Dataset Preparation 
 The codebase is based on MMDetection and MMSegmentation. Parts of the code are borrowed from UniTrack.
 * Nvidia device with CUDA 
