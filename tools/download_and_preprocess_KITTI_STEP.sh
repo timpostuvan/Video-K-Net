@@ -31,7 +31,7 @@ mv ./data/kitti-step/*/*/* ./data/training/panoptic
 
 # 8. Remove the kitti-step folder
 rm -rf ./data/kitti-step
-mkdir -p ./data/data1/datasets/STEP/kitti/
+mkdir -p ./data/kitti-step
 
 # 9. Apply scripts/kitti_step_prepare.py
 python3 ./scripts/kitti_step_prepare.py
