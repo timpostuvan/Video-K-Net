@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# 0. cd to the root folder
-cd ..
-
 # 1. Make a folder for the KITTI dataset
 mkdir -p ./data/
 
