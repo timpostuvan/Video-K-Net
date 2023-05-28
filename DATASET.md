@@ -11,16 +11,12 @@ root
 
 ### KITTI-STEP Dataset
 
-KITTI-STEP benchmark consists of 21 training sequences and 29 test sequences, where each sequence has its corresponding video panoptic segmentation masks: semantic segmentation masks and instance segmentation masks. The benchmark is based on the KITTI Tracking Evaluation and the Multi-Object Tracking and Segmentation (MOTS) benchmark. 
+KITTI-STEP benchmark consists of 21 training sequences and 29 test sequences, where each sequence has its corresponding video panoptic segmentation masks: semantic segmentation masks and instance segmentation masks. The benchmark is based on the KITTI Tracking Evaluation and the Multi-Object Tracking and Segmentation (MOTS) benchmark.
 
-Preparing KITTI-STEP dataset has two steps:
-
-1. Download the KITTI-STEP from the official website. 
-
-2. To preprocess the dataset in required format, run the following command:
+To prepare KITTI-STEP dataset, run the following script that downloads the dataset and preprocesses it in the required format:
 
 ```bash
-python scripts/kitti_step_prepare.py
+bash ./tools/download_and_preprocess_KITTI_STEP.sh
 ```
 
 The preprocessed dataset should have the following structure:
