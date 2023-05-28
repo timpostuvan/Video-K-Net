@@ -125,3 +125,7 @@ debug/*
 vis/
 analysis/*
 pretrain/*
+
+# Special cloud bash files
+DL_Conda.sh
+DL_Packages.sh
