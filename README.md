@@ -2,7 +2,7 @@
 
 We explore modifications of Video K-Net, a simple, strong, and unified framework for fully end-to-end dense video segmentation. Video K-Net is built upon K-Net, a method of unifying image segmentation via a group of learnable kernels.
 
-This project contains the training and evaluation code of Video K-Net for VPS (Video Panoptic Segmentation) on KITTI-STEP dataset.
+This project contains the training and evaluation code of Video K-Net for Video Panoptic Segmentation (VPS) on KITTI-STEP dataset.
 
 
 ### Overview of Contributions
